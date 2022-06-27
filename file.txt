@@ -1,0 +1,38 @@
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+import time
+import os
+
+
+try:
+    test_link = "http://suninjuly.github.io/file_input.html"
+    browser = webdriver.Chrome()
+    browser.get(test_link)
+
+    first_name_field = browser.find_element(By.CSS_SELECTOR, "input.first:required")
+    first_name_field.send_keys("Татьяна")
+
+    last_name_field = browser.find_element(By.CSS_SELECTOR, "input.second:required")
+    last_name_field.send_keys("Татьянова")
+
+    email_field = browser.find_element(By.CSS_SELECTOR, "input.third:required")
+    email_field.send_keys("tanya.tanya@tanya.ru")
+
+    current_dir = os.path.abspath(os.path.dirname(__file__))
+    file_path = os.path.join(current_dir, 'file.txt')  # добавляем к этому пути имя файла
+    element.send_keys(file_path)
+
+    submit_button = browser.find_element(By.CSS_SELECTOR, "button.btn")
+    submit_button.click()
+
+
+
+    time.sleep(1)
+
+    welcome_text_elt = browser.find_element(By.TAG_NAME, "h1")
+    welcome_text = welcome_text_elt.text
+    assert "Congratulations! You have successfully registered!" == welcome_text
+
+finally:
+    time.sleep(10)
+    browser.quit()
